@@ -1,12 +1,20 @@
 # Contacts Management With Cases Monitor
 
+## Clone this repository:
 ```bash
-Clone this repository: git clone https://github.com/your-username/contact-management-app.git
+ git clone https://github.com/your-username/contact-management-app.git
+```
+## Install the dependencies: 
+```bash
+npm install
+```
+##Start the app: 
 
-Install the dependencies: npm install
+```bash
+npm start
+```
 
-Start the app: npm start
-
-The app should open in your default browser at http://localhost:3000/.
-
+## The app should open in your default browser at 
+```bash
+http://localhost:3000/.
 ```
