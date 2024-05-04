@@ -1,6 +1,6 @@
 # Contacts Management With Cases Monitor
 
-# Instructions to run app:
+# Instructions to run the app:
 
 ## Clone this repository:
 ```bash
