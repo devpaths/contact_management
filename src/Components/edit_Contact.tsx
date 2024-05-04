@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 
+// Interface for defining the structure of a contact object
 interface Contact {
   id: string,
   LastName: string,
@@ -10,18 +11,23 @@ interface Contact {
   Status: string,
 }
 
+// Functional component Edit_Contact
 const Edit_Contact = () => {
-  const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>(); // Getting id parameter from URL
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
 
+  // State variables for storing contact details
   const [first_name, setfirst_name] = useState("");
   const [last_name, setlast_name] = useState("");
   const [status, setstatus] = useState("");
 
+  // Accessing contact list from Redux store state
   const contactList = useSelector((state: Contact[]) => state);
+  // Finding current contact based on id
   const currentContact = contactList.find(contact => contact.id === id);
 
+  // useEffect hook to update state when current contact changes
   useEffect(() => {
     if (currentContact) {
       setfirst_name(currentContact.FirstName);
@@ -30,17 +36,21 @@ const Edit_Contact = () => {
     }
   }, [currentContact]);
 
+  // Function to handle radio button change
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setstatus(event.target.value);
   };
 
+  // Function to handle form submission
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault(); // Preventing default form submission behavior
 
+    // Validation: Checking if all fields are filled
     if (!first_name || !last_name || !status) {
-      return toast.warning("Please fill in all details");
+      return toast.warning("Please fill in all details"); // Displaying warning toast notification
     }
 
+    // Creating updated contact object
     const updatedContact: Contact = {
       id: id!,
       FirstName: first_name,
@@ -48,11 +58,11 @@ const Edit_Contact = () => {
       Status: status,
     };
 
+    // Dispatching UPDATE_CONTACT action with payload of updated contact
     dispatch({ type: "UPDATE_CONTACT", payload: updatedContact });
-    toast.success("Contact Updated Successfully!!");
-    navigate("/");
+    toast.success("Contact Updated Successfully!!"); // Displaying success toast notification
+    navigate("/"); 
   };
-
   return (
     <div className="container">
       <div className="row">

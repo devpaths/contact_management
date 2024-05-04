@@ -1,29 +1,18 @@
 import axios from "axios";
-
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
-
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LineElement,
-  LinearScale,
-  PointElement,
-  Title,
-  Tooltip,
-} from "chart.js";
-
 import { MapContainer, TileLayer } from "react-leaflet";
-
 import WorldMap from "./Map";
 
+import Chart from "chart.js/auto"; // Importing Chart.js for creating charts
+
 const Dashboard = () => {
-  const [countriesData, setCountriesData] = useState([]);
-  const [chartData, setChartData] = useState({});
+  const [countriesData, setCountriesData] = useState([]); // State for storing countries data
+  const [chartData, setChartData] = useState(null); // State for storing chart data
+  const [chartInstance, setChartInstance] = useState(null); // State for storing chart instance
 
   useEffect(() => {
+    // Fetching countries data from API
     axios("https://disease.sh/v3/covid-19/countries").then((res) => {
       const data = res.data;
       setCountriesData(data);
@@ -31,11 +20,13 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
+    // Fetching historical data for all countries from API
     axios
       .get("https://disease.sh/v3/covid-19/historical/all?lastdays=all")
       .then((res) => {
         const data = res.data;
 
+        // Processing data for chart
         const newChartData = {
           labels: Object.keys(data.cases),
           datasets: [
@@ -43,45 +34,59 @@ const Dashboard = () => {
               label: "Cases",
               data: Object.values(data.cases),
               fill: false,
-              borderColor: "#000",
-
-              tension: 0.2,
+              borderColor: "#4CAF50",
+              borderWidth: 2,
+              pointRadius: 0,
+              tension: 0.4,
             },
           ],
         };
 
         setChartData(newChartData);
       });
-
-    ChartJS.register(
-      CategoryScale,
-      LinearScale,
-      PointElement,
-      LineElement,
-      Title,
-      Tooltip,
-      Legend
-    );
   }, []);
+
+  useEffect(() => {
+    // Creating and updating chart instance when chart data changes
+    if (chartData) {
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+      const ctx = document.getElementById("casesChart");
+      const newChartInstance = new Chart(ctx, {
+        type: "line",
+        data: chartData,
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: "Cases Chart",
+              font: {
+                size: 20,
+              },
+            },
+            legend: {
+              display: true,
+              position: "bottom",
+            },
+          },
+        },
+      });
+      setChartInstance(newChartInstance);
+    }
+  }, [chartData]);
 
   return (
     <div className="  w-full pt-20 px-4 pb-8">
-      <h1 className="text-3xl font-bold mb-10 text-gray-600 text-center">
-        Cases Chart
-      </h1>
-
       <div className="border-2 border-gray-100 w-11/12  m-auto 12 auto 10">
-        {chartData.datasets ? (
-          <Line data={chartData} />
-        ) : (
-          <h1 className="text-gray-600 text-1xl">Loading...</h1>
-        )}
+        <canvas id="casesChart"></canvas>
       </div>
 
       <h1 className="text-3xl font-bold mb-10 mt-10 text-gray-600 text-center">
         Cases World Map
       </h1>
       <div className="border-2 border-gray-500 w-full  m-auto -5 auto 5">
+        {/* Map container */}
         <MapContainer
           className="m-auto w-full  border-gray-300"
           bounds={[
@@ -93,7 +98,6 @@ const Dashboard = () => {
           scrollWheelZoom={true}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
           <WorldMap countriesData={countriesData} />
         </MapContainer>
       </div>
