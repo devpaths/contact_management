@@ -86,7 +86,6 @@ const Dashboard = () => {
         Cases World Map
       </h1>
       <div className="border-2 border-gray-500 w-full  m-auto -5 auto 5">
-        {/* Map container */}
         <MapContainer
           className="m-auto w-full  border-gray-300"
           bounds={[

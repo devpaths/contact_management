@@ -29,8 +29,8 @@ const ContactList = () => {
   }
 
   return (
-    <div className="container mx-auto px-4"> {/* Container for contact list */}
-      <div className="my-5 text-right"> {/* Navigation link to create a new contact */}
+    <div className="container mx-auto px-4">
+      <div className="my-5 text-right">
         <Link to="/add_contact" className="block mx-auto w-40 py-2 text-center text-white bg-gray-800 rounded-lg hover:bg-gray-900 transition duration-300">
           Create Contact
         </Link>
@@ -44,18 +44,18 @@ const ContactList = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-wrap -mx-4"> {/* Displaying list of contacts */}
+      <div className="flex flex-wrap -mx-4"> 
         {contacts.map((contact, index) => ( // Mapping through contacts array
-          <div key={contact.id} className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4"> {/* Displaying each contact */}
+          <div key={contact.id} className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4"> 
             <div className="bg-white shadow rounded-lg overflow-hidden">
               <div className="px-6 py-4">
                 <h5 className="text-xl font-semibold mb-2">{contact.FirstName} {contact.first_name} {contact.last_name} {contact.LastName}</h5> {/* Displaying contact name */}
-                <p className="text-gray-600">Status: {contact.status} {contact.Status}</p> {/* Displaying contact status */}
+                <p className="text-gray-600">Status: {contact.status} {contact.Status}</p> 
               </div>
               <div className="flex justify-between px-6 py-4">
-                {/* Navigation link to edit contact */}
+                
                 <Link to={`/edit/${contact.id}`} className='btn btn-primary mr-2 hover:bg-green-500 rounded-lg px-5 py-1 transition-colors duration-300'>Edit</Link>
-                {/* Button to delete contact */}
+              
                 <button type='button' onClick={() => deleteContact(contact.id)} className='btn btn-danger hover:bg-red-500 px-3 py-1 rounded-lg transition-colors duration-300'>Delete</button>
               </div>
             </div>

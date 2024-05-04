@@ -1,9 +1,9 @@
 import { Marker, Popup } from "react-leaflet";
-import L from "leaflet";
+import leaf from "leaflet";
 import markerIcon from "../img/marker_icon.png";
 const WorldMap = (countries) => {
   const { countriesData } = countries;
-  const customMarker = L.icon({
+  const customMarker = leaf.icon({
     iconUrl: markerIcon,
     iconSize: [20, 25],
     iconAnchor: [15, 30],

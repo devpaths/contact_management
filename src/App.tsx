@@ -1,34 +1,33 @@
-import React from "react";
-
-import "./App.css";
-import { Routes , Route} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 //Components
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import Sidebar from "./Components/Sidebar";
-import Contact from "./Components/Contact";
-import Add_Contact from "./Components/Add_Contact";
-import Edit_Contact from "./Components/edit_Contact";
 import Header from "./Components/header";
-import Dashboard from "./Components/Monitor";
+
+import RouteComponent from "./Route";
+import ContactList from "./Components/Contact";
 const App: React.FC = () => {
+ const [c,setC]=useState(0);
+
+ const dash =() => {
+  setC(1);
+ }
+ const dash1 =() => {
+  setC(0);
+ }
   return (
     <div>
-    <ToastContainer />
-    <Header/>
-  
-    <div className="flex">
-    <Sidebar/>
+      <ToastContainer />
+      <Header/>
+      
+      <div className="flex">
      
-      <Routes>
-        <Route>
-        <Route path="/" element={<Contact/>}/>
-            <Route path="/add_contact" element={<Add_Contact/>}/>
-            <Route path="/Monitor" element={<Dashboard/>}/>
-            <Route path="/edit/:id" element={<Edit_Contact/>}/>
-        </Route>
-        </Routes>
-    </div>
+      <Sidebar dash={dash} dash1={dash1}/>
+      {c !== 1 && <ContactList/>}
+        <RouteComponent/>
+      </div>
     </div>
   );
 };
