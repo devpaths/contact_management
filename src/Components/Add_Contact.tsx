@@ -4,61 +4,57 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 interface Contact {
-  id:string,
-  LastName:string,
-  FirstName: string,
-  Status: string,
+  id: string;
+  LastName: string;
+  FirstName: string;
+  Status: string;
 }
 
 const Add_Contact = () => {
   const [selectedOption, setSelectedOption] = useState("");
-
   const [first_name, setfirst_name] = useState("");
   const [last_name, setlast_name] = useState("");
   const [status, setstatus] = useState("");
 
-  const contact = useSelector((state:Contact[]) => state);
-  // const contact = useSelector((state: { contact: Contact[] }) => state.contact);
+  const contacts = useSelector((state: Contact[]) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-  const handleOptionChange = (option:string, done:string) => {
+  const handleOptionChange = (option: string, done: string) => {
     setSelectedOption(option);
     setstatus(done);
   };
 
-  const handleSubmit = (done:React.FormEvent<HTMLFormElement>) => {
-    done.preventDefault();
-  
-    const checkfirst_name = contact.find (
-    contact => contact.FirstName === first_name && first_name);
-    const checklast_name = contact.find (
-    contact => contact.LastName === last_name && last_name);
-     
-//To check if all the fields are Added or Not
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Check if all fields are filled
     if (!first_name || !last_name || !status) {
-      return toast.warning("Please fill in all Details");
+      return toast.warning("Please fill in all details");
     }
 
-//To check and show if the first Name is Already Registered
-      if( checkfirst_name && checklast_name){
-        
-        return toast.error("Name Already Registered!");
-      }  
-//To create new Id 
-    const data = {
-      id: contact[contact.length-1].id +1,
-      first_name,
-      last_name,
-      status,
+    // Check if contact list is empty
+    let id = "0";
+    if (contacts.length > 0) {
+      id = String(Number(contacts[contacts.length - 1].id) + 1);
     }
 
-    dispatch({type: "ADD_CONTACT",payload:data});
-    toast.success("Contact Added Successfully!!");
+    // Create new contact object
+    const data: Contact = {
+      id: id,
+      FirstName: first_name,
+      LastName: last_name,
+      Status: status,
+    };
+
+    // Dispatch action to add contact
+    dispatch({ type: "ADD_CONTACT", payload: data });
+
+    // Show success message and navigate to home
+    toast.success("Contact added successfully");
     navigate("/");
   };
- 
+
   return (
     <div className="container">
       <div className="row">
@@ -66,10 +62,7 @@ const Add_Contact = () => {
         <div className="w-full md:w-1/2 mx-auto shadow-md rounded-md p-6">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label
-                htmlFor="first_name"
-                className="block text-sm font-bold mb-2"
-              >
+              <label htmlFor="first_name" className="block text-sm font-bold mb-2">
                 First Name
               </label>
               <input
@@ -77,15 +70,12 @@ const Add_Contact = () => {
                 value={first_name}
                 type="text"
                 placeholder="First Name"
-                onChange={(done) => setfirst_name(done.target.value)}
+                onChange={(event) => setfirst_name(event.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="last_name"
-                className="block text-sm font-bold mb-2"
-              >
+              <label htmlFor="last_name" className="block text-sm font-bold mb-2">
                 Last Name
               </label>
               <input
@@ -93,7 +83,7 @@ const Add_Contact = () => {
                 value={last_name}
                 type="text"
                 placeholder="Last Name"
-                onChange={(done) => setlast_name(done.target.value)}
+                onChange={(event) => setlast_name(event.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
               />
             </div>
@@ -102,30 +92,26 @@ const Add_Contact = () => {
               <div className="flex items-center mb-2">
                 <input
                   type="radio"
-                  id="Active"
-                  name="category"
+                  id="active"
+                  name="status"
                   value="Active"
                   className="mr-2"
                   checked={selectedOption === "active"}
-                  onChange={(done) =>
-                    handleOptionChange("active", done.target.value)
-                  }
+                  onChange={(event) => handleOptionChange("active", event.target.value)}
                 />
-                <label htmlFor="work" className="mr-4">
+                <label htmlFor="active" className="mr-4">
                   Active
                 </label>
                 <input
                   type="radio"
-                  id="Inactive"
-                  name="category"
+                  id="inactive"
+                  name="status"
                   value="Inactive"
                   className="mr-2"
                   checked={selectedOption === "Inactive"}
-                  onChange={(done) =>
-                    handleOptionChange("Inactive", done.target.value)
-                  }
+                  onChange={(event) => handleOptionChange("Inactive", event.target.value)}
                 />
-                <label htmlFor="personal">Inactive</label>
+                <label htmlFor="inactive">Inactive</label>
               </div>
             </div>
             <div className="mb-4">
