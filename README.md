@@ -1,5 +1,7 @@
 # Contacts Management With Cases Monitor
 
+# Instructions:
+
 ## Clone this repository:
 ```bash
  git clone https://github.com/your-username/contact-management-app.git
@@ -8,7 +10,7 @@
 ```bash
 npm install
 ```
-##Start the app: 
+## Start the app: 
 
 ```bash
 npm start
