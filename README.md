@@ -1,6 +1,6 @@
 # Contacts Management With Cases Monitor
 
-# Instructions:
+# Instructions to run app:
 
 ## Clone this repository:
 ```bash
@@ -18,5 +18,5 @@ npm start
 
 ## The app should open in your default browser at 
 ```bash
-http://localhost:3000/.
+http://localhost:3000/
 ```
