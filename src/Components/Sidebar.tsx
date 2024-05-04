@@ -6,7 +6,7 @@ const Sidebar = ({dash,dash1}) => {
     return (
         
         <div className="flex h-screen">
-          <div className="bg-gray-800 text-white w-64 h-200">
+          <div className="bg-gray-800 text-white w-60 h-200">
             <ul>
               <li className="mt-8 py-4 px-6">
                 <Link to="/" onClick={dash1} className="block hover:pl-2 rounded-lg transition-all duration-300">

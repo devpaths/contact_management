@@ -14,7 +14,7 @@ interface Contact {
 }
 
 // Functional component ContactList
-const ContactList = () => {
+const ContactList = ({dash3,dash4}) => {
   // Accessing contacts from Redux store state
   const contacts = useSelector((state: Contact[]) => state);
   // Dispatch function for dispatching actions to Redux store
@@ -31,7 +31,7 @@ const ContactList = () => {
   return (
     <div className="container mx-auto px-4">
       <div className="my-5 text-right">
-        <Link to="/add_contact" className="block mx-auto w-40 py-2 text-center text-white bg-gray-800 rounded-lg hover:bg-gray-900 transition duration-300">
+        <Link to="/add_contact" onClick={dash4} className="block mx-auto w-40 py-2 text-center text-white bg-gray-800 rounded-lg hover:bg-gray-900 transition duration-300">
           Create Contact
         </Link>
       </div>
@@ -54,7 +54,7 @@ const ContactList = () => {
               </div>
               <div className="flex justify-between px-6 py-4">
                 
-                <Link to={`/edit/${contact.id}`} className='btn btn-primary mr-2 hover:bg-green-500 rounded-lg px-5 py-1 transition-colors duration-300'>Edit</Link>
+                <Link onClick={dash3} to={`/edit/${contact.id}`} className='btn btn-primary mr-2 hover:bg-green-500 rounded-lg px-5 py-1 transition-colors duration-300'>Edit</Link>
               
                 <button type='button' onClick={() => deleteContact(contact.id)} className='btn btn-danger hover:bg-red-500 px-3 py-1 rounded-lg transition-colors duration-300'>Delete</button>
               </div>

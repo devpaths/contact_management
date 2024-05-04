@@ -12,7 +12,7 @@ interface Contact {
 }
 
 // Functional component Edit_Contact
-const Edit_Contact = () => {
+const Edit_Contact = ({dash5}) => {
   const { id } = useParams<{ id: string }>(); // Getting id parameter from URL
   const dispatch = useDispatch(); 
   const navigate = useNavigate(); 
@@ -124,6 +124,7 @@ const Edit_Contact = () => {
             </div>
             <div className="mb-4">
               <input
+              onClick={dash5}
                 type="submit"
                 value="Update Contact"
                 className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"

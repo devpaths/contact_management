@@ -10,7 +10,7 @@ interface Contact {
   Status: string;
 }
 
-const Add_Contact = () => {
+const Add_Contact = ({dash6}) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [first_name, setfirst_name] = useState("");
   const [last_name, setlast_name] = useState("");
@@ -117,6 +117,7 @@ const Add_Contact = () => {
             <div className="mb-4">
               <input
                 type="submit"
+                onClick={dash6}
                 value="Add Contact"
                 className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
               />
