@@ -1,0 +1,8 @@
+@media (max-width: 768px) {
+    .responsive-sidebar {
+      width: 6.7rem; /* Adjust the width as needed */
+    }
+    .custom-link {
+        font-size: 0.8rem; /* Adjust the font size here */
+      }
+  }

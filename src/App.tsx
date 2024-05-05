@@ -20,6 +20,9 @@ const App: React.FC = () => {
  const dash1 =() => {
   setC(0);
  }
+ useEffect(() => {
+  setC(1);
+}, []);
   return (
     <div>
       <ToastContainer />

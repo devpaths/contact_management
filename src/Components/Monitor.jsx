@@ -78,14 +78,14 @@ const Dashboard = () => {
 
   return (
     <div className="  w-full pt-20 px-4 pb-8">
-      <div className="border-2 border-gray-100 w-11/12  m-auto 12 auto 10">
+      <div className="border-2 border-gray-100  m-auto 12 auto 10">
         <canvas id="casesChart"></canvas>
       </div>
 
       <h1 className="text-3xl font-bold mb-10 mt-10 text-gray-600 text-center">
         Cases World Map
       </h1>
-      <div className="border-2 border-gray-500 w-full  m-auto -5 auto 5">
+      <div className="border-2 border-gray-500 w-11/12  m-auto 5 auto 5">
         <MapContainer
           className="m-auto w-full  border-gray-300"
           bounds={[
