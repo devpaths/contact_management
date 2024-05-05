@@ -5,12 +5,13 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import WorldMap from "./Map";
 
 import Chart from "chart.js/auto"; // Importing Chart.js for creating charts
+import { useNavigate } from "react-router";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [countriesData, setCountriesData] = useState([]); // State for storing countries data
   const [chartData, setChartData] = useState(null); // State for storing chart data
   const [chartInstance, setChartInstance] = useState(null); // State for storing chart instance
-
   useEffect(() => {
     // Fetching countries data from API
     axios("https://disease.sh/v3/covid-19/countries").then((res) => {

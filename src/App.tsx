@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Edit_Contact from "./Components/edit_Contact";
 //Components
 import { ToastContainer } from 'react-toastify';
@@ -12,6 +12,8 @@ import Add_Contact from "./Components/Add_Contact";
 import Dashboard from "./Components/Monitor";
 
 const App: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
  const [c,setC]=useState(0);
 
  const dash =() => {
@@ -21,8 +23,12 @@ const App: React.FC = () => {
   setC(0);
  }
  useEffect(() => {
-  setC(1);
-}, []);
+  if (location.pathname === "/Monitor") {
+    setC(1);
+  }
+},[location.pathname]);
+
+
   return (
     <div>
       <ToastContainer />
@@ -36,7 +42,7 @@ const App: React.FC = () => {
       
       <Routes>
       <Route path="/add_contact" element={<Add_Contact dash6={dash1}/>} />
-      <Route path="/Monitor" element={<Dashboard />} />
+      <Route path="/Monitor" element={<Dashboard/>} />
       <Route path="/edit/:id" element={<Edit_Contact dash5={dash1} />} />
     </Routes>
       </div>
