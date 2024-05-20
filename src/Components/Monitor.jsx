@@ -105,8 +105,8 @@ const Dashboard = () => {
       <div className="cover h-screen">
         <div className="bg-gray-800 text-white h-[1000px] w-64 mx-[-272px] my-[-1000px]">
           <ul>
-            <li className="mt-8 py-4 px-6"></li>
-            <li className="py-2 px-6"></li>
+            {/* <li className="mt-8 py-4 px-6"></li>
+            <li className="py-2 px-6"></li> */}
           </ul>
           <div className="absolute bottom-10 left-4 font-bold">Dashboard</div>
         </div>

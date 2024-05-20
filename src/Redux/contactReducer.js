@@ -1,4 +1,4 @@
-// Initial state of the contacts array
+//Testing using initial state of the contacts array
 const initialState = [
   // {
   //   id: "0",
